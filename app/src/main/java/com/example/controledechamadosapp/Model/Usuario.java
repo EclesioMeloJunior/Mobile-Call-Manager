@@ -2,10 +2,19 @@ package com.example.controledechamadosapp.Model;
 
 public class Usuario {
 
+    private int id;
     private String nome;
     private String email;
     private String telefone;
     private int cargo;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCargo() {
         return cargo;

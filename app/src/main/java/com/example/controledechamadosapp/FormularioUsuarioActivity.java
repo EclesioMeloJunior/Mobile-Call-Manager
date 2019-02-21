@@ -2,9 +2,13 @@ package com.example.controledechamadosapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.example.controledechamadosapp.DAO.UsuarioDAO;
 import com.example.controledechamadosapp.Model.Usuario;
 
 public class FormularioUsuarioActivity extends AppCompatActivity {
@@ -14,6 +18,7 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
     private EditText emailUsuario;
     private EditText telefoneUsuario;
     private RadioButton cargoUsuario;
+    private Button formUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +28,39 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
         nomeUsuario = findViewById(R.id.nome_usuario);
         emailUsuario = findViewById(R.id.email_usuario);
         telefoneUsuario = findViewById(R.id.telefone_usuario);
-        cargoUsuario = findViewById(R.id.opcao1_cargo);
-        cargoUsuario = findViewById(R.id.opcao2_cargo);
+        formUsuario = findViewById(R.id.formUsuario);
+
+        formUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                usuario.setNome(nomeUsuario.getText().toString());
+                usuario.setEmail(emailUsuario.getText().toString());
+                usuario.setTelefone(telefoneUsuario.getText().toString());
+                //usuario.setCargo(cargoUsuario.get);
+
+                UsuarioDAO usuarioDAO = new UsuarioDAO(FormularioUsuarioActivity.this);
+
+                usuarioDAO.inserir(usuario);
+
+
+
+                if(usuario.getId() == 0){
+                    usuarioDAO.inserir(usuario);
+                }
+                else{
+                    usuarioDAO.alterar(usuario);
+                }
+
+                usuarioDAO.close();
+                //MOSTRAR MENSAGEM
+                Toast.makeText(FormularioUsuarioActivity.this, "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
+
+                //Destruir a Activity
+                finish();
+            }
+        });
+
 
 
 

@@ -1,8 +1,15 @@
 package com.example.controledechamadosapp.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.controledechamadosapp.Model.Usuario;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO extends SQLiteOpenHelper {
     public UsuarioDAO(Context context) {
@@ -11,11 +18,11 @@ public class UsuarioDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table usuario (id integer primary key," +
+        String sql = "create table usuarios (id integer primary key," +
                 "nome text not null," +
                 "email text," +
-                "endereco ," +
-                "telefone text)";
+                "telefone text ," +
+                "cargo integer)";
 
         db.execSQL(sql);
     }
@@ -23,5 +30,36 @@ public class UsuarioDAO extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public void inserir(Usuario usuario){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues dados = new ContentValues();
+
+        dados.put("nome", usuario.getNome());
+        dados.put("email", usuario.getEmail());
+        dados.put("telefone", usuario.getTelefone());
+        dados.put("cargo", usuario.getCargo());
+        db.insert("usuarios", null, dados);
+    }
+
+
+
+    public void deletar(Usuario usuario) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] parametros = {String.valueOf(usuario.getId())};
+        db.delete("usuarios","id = ?", parametros);
+    }
+
+    public void alterar(Usuario usuario) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues dados = new ContentValues();
+        dados.put("nome", usuario.getNome());
+        dados.put("email", usuario.getEmail());
+        dados.put("telefone", usuario.getTelefone());
+        dados.put("cargo", usuario.getCargo());
+
+        String[] parametros = {String.valueOf(usuario.getId())};
+        db.update("usuarios", dados, "id = ?", parametros);
     }
 }
