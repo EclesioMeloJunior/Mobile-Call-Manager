@@ -10,17 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <activity android:name=".ItemChamadoPersonalizadoActivity"></activity>
         <activity android:name=".ListagemChamadosActivity">
 =======
         <activity android:name=".FormularioUsuarioActivity">
 >>>>>>> d08594c0527b5ceef0aa8fa4cc4a8b79ba16a8de
+=======
+        <activity android:name=".ChamadoActivity"></activity>
+        <activity android:name=".MainActivity">
+>>>>>>> 0cfb49ac9dc4f4f2b2d6e73894c272f2a856392e
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <activity android:name=".MainActivity" />
 =======
@@ -28,6 +33,8 @@
 
         </activity>
 >>>>>>> d08594c0527b5ceef0aa8fa4cc4a8b79ba16a8de
+=======
+>>>>>>> 0cfb49ac9dc4f4f2b2d6e73894c272f2a856392e
     </application>
 
 </manifest>
