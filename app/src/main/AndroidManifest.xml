@@ -9,15 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".ItemChamadoPersonalizadoActivity"></activity>
         <activity android:name=".ListagemChamadosActivity">
+=======
+        <activity android:name=".FormularioUsuarioActivity">
+>>>>>>> d08594c0527b5ceef0aa8fa4cc4a8b79ba16a8de
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".MainActivity" />
+=======
+        <activity android:name=".MainActivity">
+
+        </activity>
+>>>>>>> d08594c0527b5ceef0aa8fa4cc4a8b79ba16a8de
     </application>
 
 </manifest>

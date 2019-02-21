@@ -2,16 +2,15 @@ package com.example.controledechamadosapp.Model;
 
 import java.util.Date;
 
-enum ChamadoStatus {
-    ABERTO, EM_ANDAMENTO, FECHADO
-}
-
 public class Chamado {
     public int id;
     public String assunto;
     public String descricao;
     public Date data_criacao;
     public ChamadoStatus status;
+
+    public Usuario usuarioDestino;
+    public Usuario usuarioLancamento;
 
     public Chamado(int id, String assunto, String descricao, Date data_criacao, ChamadoStatus status) {
         this.id = id;
