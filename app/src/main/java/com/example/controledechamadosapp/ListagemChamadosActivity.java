@@ -35,7 +35,7 @@ public class ListagemChamadosActivity extends AppCompatActivity {
                 break;
 
             case R.id.listar_usuarios:
-                Intent listUsuarios = new Intent(this, FormularioUsuarioActivity.class);
+                Intent listUsuarios = new Intent(this, ListarUsuariosActivity.class);
                 startActivity(listUsuarios);
                 break;
         }

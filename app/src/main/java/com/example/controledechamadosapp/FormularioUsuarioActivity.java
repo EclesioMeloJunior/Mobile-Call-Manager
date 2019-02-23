@@ -43,14 +43,6 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
 
                 usuarioDAO.inserir(usuario);
 
-                if(usuario.getId() == 0){
-                    usuarioDAO.inserir(usuario);
-                }
-                else{
-                    formUsuario.setText("Alterar");
-                    usuarioDAO.alterar(usuario);
-                }
-
                 usuarioDAO.close();
                 //MOSTRAR MENSAGEM
                 Toast.makeText(FormularioUsuarioActivity.this, "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
@@ -59,9 +51,5 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
     }
 }
