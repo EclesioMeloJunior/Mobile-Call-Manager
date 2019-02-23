@@ -12,6 +12,9 @@ public class Chamado {
     public Usuario usuarioDestino;
     public Usuario usuarioLancamento;
 
+    public Chamado() {
+    }
+
     public Chamado(int id, String assunto, String descricao, Date data_criacao, ChamadoStatus status) {
         this.id = id;
         this.assunto = assunto;
@@ -70,5 +73,21 @@ public class Chamado {
 
     public void setStatus(ChamadoStatus status) {
         this.status = status;
+    }
+
+    public Usuario getUsuarioDestino() {
+        return usuarioDestino;
+    }
+
+    public void setUsuarioDestino(Usuario usuarioDestino) {
+        this.usuarioDestino = usuarioDestino;
+    }
+
+    public Usuario getUsuarioLancamento() {
+        return usuarioLancamento;
+    }
+
+    public void setUsuarioLancamento(Usuario usuarioLancamento) {
+        this.usuarioLancamento = usuarioLancamento;
     }
 }

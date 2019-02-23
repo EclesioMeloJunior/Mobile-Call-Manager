@@ -39,9 +39,9 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-
     @Override
     public String toString() {
-        return super.toString();
+        return nome + " - " + id;
     }
 }
+

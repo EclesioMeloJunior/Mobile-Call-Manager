@@ -79,4 +79,21 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         return usuarios;
     }
 
+    public List<Usuario> popularSpinner(){
+        String sql = "Select id, nome from usuarios;";
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(sql, null);
+
+        List<Usuario> usuarios = new ArrayList<>();
+        while (c.moveToNext()) {
+            Usuario usuario = new Usuario();
+            usuario.setId(c.getInt(c.getColumnIndex("id")));
+            usuario.setNome(c.getString(c.getColumnIndex("nome")));
+
+            usuarios.add(usuario);
+        }
+        return usuarios;
+    }
+
 }
