@@ -1,7 +1,10 @@
 package com.example.controledechamadosapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -15,6 +18,30 @@ import java.util.List;
 public class ListagemChamadosActivity extends AppCompatActivity {
 
     private ListView lvChamados;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_criar_usuario:
+                Intent criarUsuarios = new Intent(this, FormularioUsuarioActivity.class);
+                startActivity(criarUsuarios);
+                break;
+
+            case R.id.listar_usuarios:
+                Intent listUsuarios = new Intent(this, FormularioUsuarioActivity.class);
+                startActivity(listUsuarios);
+                break;
+        }
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

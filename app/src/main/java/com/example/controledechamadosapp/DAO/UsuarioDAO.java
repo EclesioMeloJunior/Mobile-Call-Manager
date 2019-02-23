@@ -57,4 +57,26 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         String[] parametros = {String.valueOf(usuario.getId())};
         db.update("usuarios", dados, "id = ?", parametros);
     }
+
+    public List<Usuario> listarUsuarios()
+    {
+        String sql = "Select * from usuarios;";
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(sql, null);
+
+        List<Usuario> usuarios = new ArrayList<>();
+        while (c.moveToNext()) {
+            Usuario usuario = new Usuario();
+            usuario.setEmail(c.getString(c.getColumnIndex("email")));
+            usuario.setNome(c.getString(c.getColumnIndex("nome")));
+            usuario.setTelefone(c.getString(c.getColumnIndex("telefone")));
+            usuario.setId(c.getInt(c.getColumnIndex("id")));
+
+            usuarios.add(usuario);
+        }
+
+        return usuarios;
+    }
+
 }

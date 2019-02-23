@@ -6,7 +6,6 @@ public class Usuario {
     private String nome;
     private String email;
     private String telefone;
-    private int cargo;
 
     public int getId() {
         return id;
@@ -14,14 +13,6 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(int cargo) {
-        this.cargo = cargo;
     }
 
     public String getNome() {
