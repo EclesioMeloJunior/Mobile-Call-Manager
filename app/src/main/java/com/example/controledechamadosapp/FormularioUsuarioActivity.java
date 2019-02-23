@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.controledechamadosapp.DAO.UsuarioDAO;
@@ -17,7 +18,6 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
     private EditText nomeUsuario;
     private EditText emailUsuario;
     private EditText telefoneUsuario;
-    private RadioButton cargoUsuario;
     private Button formUsuario;
 
     @Override
@@ -25,9 +25,10 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_usuario);
 
-        nomeUsuario = findViewById(R.id.nome_usuario);
+        nomeUsuario = findViewById(R.id.nomeUsuario);
         emailUsuario = findViewById(R.id.email_usuario);
         telefoneUsuario = findViewById(R.id.telefone_usuario);
+
         formUsuario = findViewById(R.id.formUsuario);
 
         formUsuario.setOnClickListener(new View.OnClickListener() {
@@ -37,18 +38,16 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
                 usuario.setNome(nomeUsuario.getText().toString());
                 usuario.setEmail(emailUsuario.getText().toString());
                 usuario.setTelefone(telefoneUsuario.getText().toString());
-                //usuario.setCargo(cargoUsuario.get);
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO(FormularioUsuarioActivity.this);
 
                 usuarioDAO.inserir(usuario);
 
-
-
                 if(usuario.getId() == 0){
                     usuarioDAO.inserir(usuario);
                 }
                 else{
+                    formUsuario.setText("Alterar");
                     usuarioDAO.alterar(usuario);
                 }
 

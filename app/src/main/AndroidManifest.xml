@@ -11,17 +11,21 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ItemChamadoPersonalizadoActivity"></activity>
-        <activity android:name=".ListagemChamadosActivity"></activity>
-
-        <activity android:name=".FormularioUsuarioActivity"></activity>
-
-        <activity android:name=".ChamadoActivity"></activity>
-        <activity android:name=".MainActivity">
-
+        <activity android:name=".ListagemChamadosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".FormularioUsuarioActivity">
+
+        </activity>
+
+        <activity android:name=".ChamadoActivity"></activity>
+        <activity android:name=".MainActivity">
+
+
         </activity>
 
 

@@ -21,8 +21,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         String sql = "create table usuarios (id integer primary key," +
                 "nome text not null," +
                 "email text," +
-                "telefone text ," +
-                "cargo integer)";
+                "telefone text)";
 
         db.execSQL(sql);
     }
@@ -39,11 +38,8 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         dados.put("nome", usuario.getNome());
         dados.put("email", usuario.getEmail());
         dados.put("telefone", usuario.getTelefone());
-        dados.put("cargo", usuario.getCargo());
         db.insert("usuarios", null, dados);
     }
-
-
 
     public void deletar(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
@@ -57,7 +53,6 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         dados.put("nome", usuario.getNome());
         dados.put("email", usuario.getEmail());
         dados.put("telefone", usuario.getTelefone());
-        dados.put("cargo", usuario.getCargo());
 
         String[] parametros = {String.valueOf(usuario.getId())};
         db.update("usuarios", dados, "id = ?", parametros);
