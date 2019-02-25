@@ -46,11 +46,11 @@ public class ChamadosAdapterPersonalizado extends BaseAdapter {
 
         Chamado chamado = this.adpterList.get(position);
 
-        TextView status = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_status);
+  //      TextView status = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_status);
         TextView assunto = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_assunto);
         TextView descricao = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_descricao);
 
-        switch (chamado.getStatus()) {
+/*        switch (chamado.getStatus()) {
             case ABERTO: {
                 status.setText("ABERTO");
                 status.setTextColor(Color.BLUE);
@@ -66,7 +66,7 @@ public class ChamadosAdapterPersonalizado extends BaseAdapter {
                 status.setTextColor(Color.GREEN);
             }
         }
-
+*/
         assunto.setText(chamado.getAssunto());
         descricao.setText(chamado.getDescricao());
 

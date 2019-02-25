@@ -9,6 +9,8 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.controledechamadosapp.DAO.ChamadoDAO;
+import com.example.controledechamadosapp.DAO.UsuarioDAO;
 import com.example.controledechamadosapp.Helpers.ChamadosAdapterPersonalizado;
 import com.example.controledechamadosapp.Model.Chamado;
 
@@ -47,18 +49,23 @@ public class ListagemChamadosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listagem_chamados);
+        this.lvChamados = findViewById(R.id.lvChamados);
 
-        List<Chamado> chamados = new ArrayList<>();
+        UsuarioDAO usuarioDAO = new UsuarioDAO(this);
+        List<Chamado> chamados = usuarioDAO.listarChamado();
 
+        ChamadosAdapterPersonalizado adapter = new ChamadosAdapterPersonalizado(chamados, this);
+
+        lvChamados.setAdapter(adapter);
+
+
+
+        /*
         chamados.add(new Chamado("Problema na Impressora", "Houve algum tipo de probelma com o drive da impressora, por favor vir na minha sala urgentemente"));
         chamados.add(new Chamado("Problema na Impressora", "Houve algum tipo de probelma com o drive da impressora, por favor vir na minha sala urgentemente"));
         chamados.add(new Chamado("Computador com Tela Azul", "Houve algum tipo de probelma com o drive da impressora, por favor vir na minha sala urgentemente"));
         chamados.add(new Chamado("Máquina sem Acesso à internete", "Houve algum tipo de probelma com o drive da impressora, por favor vir na minha sala urgentemente"));
         chamados.add(new Chamado("Erro #404 na busca", "Houve algum tipo de probelma com o drive da impressora, por favor vir na minha sala urgentemente"));
-
-        this.lvChamados = (ListView) findViewById(R.id.lvChamados);
-
-        ChamadosAdapterPersonalizado adapterChamados = new ChamadosAdapterPersonalizado(chamados, this);
-        this.lvChamados.setAdapter(adapterChamados);
+*/
     }
 }

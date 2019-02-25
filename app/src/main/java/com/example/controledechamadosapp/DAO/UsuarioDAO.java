@@ -6,14 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.controledechamadosapp.Model.Chamado;
 import com.example.controledechamadosapp.Model.Usuario;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO extends SQLiteOpenHelper {
     public UsuarioDAO(Context context) {
-        super(context, "Controle de chamadas", null, 1);
+        super(context, "ControleChamadas", null, 1);
     }
 
     @Override
@@ -24,6 +26,17 @@ public class UsuarioDAO extends SQLiteOpenHelper {
                 "telefone text)";
 
         db.execSQL(sql);
+
+        String sqlChamado = "create table chamados (id integer primary key," +
+                "assunto text not null," +
+                "descricao text,"+
+        //"dataCriacao date ," +
+                "idUserRemetente integer ," +
+                "idUserDestinatario integer," +
+        //"status integer," +
+                "FOREIGN KEY (idUserRemetente) REFERENCES usuarios(id)," +
+                "FOREIGN KEY (idUserDestinatario) REFERENCES usuarios(id))";
+        db.execSQL(sqlChamado);
     }
 
     @Override
@@ -95,5 +108,41 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         }
         return usuarios;
     }
+
+    public void inserirChamado(Chamado chamado){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues dados = new ContentValues();
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //String date = sdf.format(chamado.getData_criacao());
+
+        dados.put("assunto", chamado.getAssunto());
+        dados.put("descricao", chamado.getDescricao());
+        //  dados.put("dataCriacao", date);
+        dados.put("idUserRemetente", chamado.getUsuarioLancamento().getId());
+        dados.put("idUserDestinatario", chamado.getUsuarioDestino().getId());
+        //dados.put("status", chamado.getStatus().ordinal());
+        db.insert("chamados", null, dados);
+    }
+
+
+    public List<Chamado> listarChamado()
+    {
+        String sql = "select * from chamados inner join usuarios on chamados.idUserDestinatario = usuarios.id;";
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(sql, null);
+
+        List<Chamado> chamados = new ArrayList<>();
+        while (c.moveToNext()) {
+            Chamado chamado = new Chamado();
+            chamado.setAssunto(c.getString(c.getColumnIndex("assunto")));
+            chamado.setDescricao(c.getString(c.getColumnIndex("descricao")));
+            chamados.add(chamado);
+        }
+
+        return chamados;
+    }
+
 
 }

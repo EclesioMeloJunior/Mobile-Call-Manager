@@ -22,8 +22,8 @@ import java.util.List;
 public class ChamadoActivity extends AppCompatActivity {
 
     private Button formularioBtn;
-    private Spinner Emissor;
-    private Spinner Receptor;
+    private Spinner spinerRemetente;
+    private Spinner spinnerDestinatario;
     private TextInputEditText formularioAssunto;
     private TextInputEditText formularioDescricao;
     Chamado chamado = new Chamado();
@@ -35,8 +35,8 @@ public class ChamadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chamado);
 
         formularioBtn = findViewById(R.id.formulario_btn);
-        Emissor = findViewById(R.id.spinner_emissor);
-        Receptor = findViewById(R.id.spinner_receptor);
+        spinerRemetente = findViewById(R.id.spinner_emissor);
+        spinnerDestinatario = findViewById(R.id.spinner_receptor);
         formularioAssunto = findViewById(R.id.formulario_assunto);
         formularioDescricao = findViewById(R.id.formulario_descricao);
 
@@ -49,26 +49,24 @@ public class ChamadoActivity extends AppCompatActivity {
                 chamado.setAssunto(formularioAssunto.getText().toString());
                 chamado.setDescricao(formularioDescricao.getText().toString());
 
-               // Usuario usuarioEmissor = (Usuario) Emissor.getSelectedItem();
-                //int idEmissor = usuarioEmissor.getId();
-                //usuarioEmissor.setId(idEmissor);
-                //chamado.setUsuarioDestino(usuarioEmissor);
+                Usuario usuarioEmissor = new Usuario();
+                int idEmissor = ((Usuario) spinerRemetente.getSelectedItem()).getId();
+                usuarioEmissor.setId(idEmissor);
+                chamado.setUsuarioLancamento(usuarioEmissor);
 
-              //  Usuario usuarioReceptor = (Usuario) Emissor.getSelectedItem();
-                //int idReceptor = usuarioReceptor.getId();
-              //  usuarioReceptor.setId(idReceptor);
-               // chamado.setUsuarioDestino(usuarioReceptor);
+                int idReceptor = ((Usuario) spinnerDestinatario.getSelectedItem()).getId();
+                Usuario usuarioReceptor = new Usuario();
+                usuarioReceptor.setId(idReceptor);
+                chamado.setUsuarioDestino(usuarioReceptor);
 
 
-                ChamadoDAO chamadoDAO = new ChamadoDAO(ChamadoActivity.this);
-
-                chamadoDAO.inserir(chamado);
-
+                UsuarioDAO chamadoDAO = new UsuarioDAO(ChamadoActivity.this);
+                chamadoDAO.inserirChamado(chamado);
                 chamadoDAO.close();
 
                 Toast.makeText(ChamadoActivity.this, "Chamado registrado com sucesso!", Toast.LENGTH_LONG).show();
 
-                finish();
+//                finish();
             }
         });
     }
@@ -78,7 +76,7 @@ public class ChamadoActivity extends AppCompatActivity {
         List<Usuario> usuarios = usuarioDAO.popularSpinner();
         ArrayAdapter<Usuario> arrayAdapterEmissor = new ArrayAdapter<Usuario>(this,
                 android.R.layout.simple_spinner_item, usuarios);
-        Emissor.setAdapter(arrayAdapterEmissor);
+        spinerRemetente.setAdapter(arrayAdapterEmissor);
     }
 
     public void popularReceptor(){
@@ -86,7 +84,7 @@ public class ChamadoActivity extends AppCompatActivity {
         List<Usuario> usuarios = usuarioDAO.popularSpinner();
         ArrayAdapter<Usuario> arrayAdapterReceptor = new ArrayAdapter<Usuario>(this,
                 android.R.layout.simple_spinner_item, usuarios);
-        Receptor.setAdapter(arrayAdapterReceptor);
+        spinnerDestinatario.setAdapter(arrayAdapterReceptor);
     }
 
 
