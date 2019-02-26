@@ -1,5 +1,7 @@
 package com.example.controledechamadosapp;
 
+import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +17,9 @@ import com.example.controledechamadosapp.Model.Usuario;
 public class FormularioUsuarioActivity extends AppCompatActivity {
 
     Usuario usuario = new Usuario();
-    private EditText nomeUsuario;
-    private EditText emailUsuario;
-    private EditText telefoneUsuario;
+    private TextInputEditText nomeUsuario;
+    private TextInputEditText emailUsuario;
+    private TextInputEditText telefoneUsuario;
     private Button formUsuario;
 
     @Override
@@ -25,15 +27,30 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_usuario);
 
+        formUsuario = findViewById(R.id.formUsuario);
+
         nomeUsuario = findViewById(R.id.nomeUsuario);
         emailUsuario = findViewById(R.id.email_usuario);
         telefoneUsuario = findViewById(R.id.telefone_usuario);
 
-        formUsuario = findViewById(R.id.formUsuario);
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("usuario")){
+            usuario = (Usuario) intent.getSerializableExtra("usuario");
+        }else{
+            usuario = new Usuario();
+        }
+
+        if (usuario != null){
+            nomeUsuario.setText(usuario.getNome());
+            emailUsuario.setText(usuario.getEmail());
+            telefoneUsuario.setText(usuario.getTelefone());
+        }
 
         formUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 usuario.setNome(nomeUsuario.getText().toString());
                 usuario.setEmail(emailUsuario.getText().toString());
@@ -41,14 +58,21 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO(FormularioUsuarioActivity.this);
 
-                usuarioDAO.inserir(usuario);
+                if(usuario.getId()!= 0){
+                    usuarioDAO.alterar(usuario);
+                    Toast.makeText(FormularioUsuarioActivity.this, "Alterado com sucesso",Toast.LENGTH_LONG).show();
+
+                }else{
+                    usuarioDAO.inserir(usuario);
+                    Toast.makeText(FormularioUsuarioActivity.this, "Salvo com sucesso",Toast.LENGTH_LONG).show();
+                }
 
                 usuarioDAO.close();
-                //MOSTRAR MENSAGEM
-                Toast.makeText(FormularioUsuarioActivity.this, "Contato salvo com sucesso!", Toast.LENGTH_LONG).show();
 
-                //Destruir a Activity
+
                 finish();
+
+
             }
         });
     }
