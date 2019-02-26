@@ -1,8 +1,9 @@
 package com.example.controledechamadosapp.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Chamado {
+public class Chamado implements Serializable {
     public int id;
     public String assunto;
     public String descricao;

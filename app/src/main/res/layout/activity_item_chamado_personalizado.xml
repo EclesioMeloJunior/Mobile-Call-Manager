@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp">
 
     <TextView
+        android:id="@+id/lvpersonalizada_chamado_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/lvpersonalizada_chamado_assunto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:textColor="#000"
         android:textSize="10pt"
-        android:id="@+id/lvpersonalizada_chamado_assunto"/>
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/lvpersonalizada_chamado_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="5pt"
-        android:id="@+id/lvpersonalizada_chamado_status"/>
+        android:textSize="5pt" />
 
     <TextView
+        android:id="@+id/lvpersonalizada_chamado_descricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="normal"
-        android:id="@+id/lvpersonalizada_chamado_descricao"/>
+        android:textStyle="normal" />
 
 </LinearLayout>

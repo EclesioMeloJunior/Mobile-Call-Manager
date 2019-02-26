@@ -22,7 +22,7 @@
         <activity android:name=".FormularioUsuarioActivity">
 
         </activity>
-        <activity android:name=".ChamadoActivity">
+        <activity android:name=".FormularioChamadoActivity">
 
         </activity>
         <activity android:name=".MainActivity"></activity>

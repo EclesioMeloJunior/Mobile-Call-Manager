@@ -36,7 +36,12 @@ public class ChamadosAdapterPersonalizado extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return this.adpterList.get(position).id;
+    }
+
+    public Chamado getChamadoAtPosition(int pos)
+    {
+        return this.adpterList.get(pos);
     }
 
     @Override
@@ -46,27 +51,32 @@ public class ChamadosAdapterPersonalizado extends BaseAdapter {
 
         Chamado chamado = this.adpterList.get(position);
 
-  //      TextView status = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_status);
+        TextView viewId = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_id);
+        TextView status = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_status);
         TextView assunto = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_assunto);
         TextView descricao = (TextView) view.findViewById(R.id.lvpersonalizada_chamado_descricao);
 
-/*        switch (chamado.getStatus()) {
+        switch (chamado.getStatus()) {
             case ABERTO: {
                 status.setText("ABERTO");
                 status.setTextColor(Color.BLUE);
+                break;
             }
 
             case EM_ANDAMENTO: {
                 status.setText("EM ANDAMENTO");
                 status.setTextColor(Color.YELLOW);
+                break;
             }
 
             case FECHADO: {
                 status.setText("FECHADO");
                 status.setTextColor(Color.GREEN);
+                break;
             }
         }
-*/
+
+        viewId.setText(String.valueOf(chamado.getId()));
         assunto.setText(chamado.getAssunto());
         descricao.setText(chamado.getDescricao());
 

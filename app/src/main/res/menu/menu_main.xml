@@ -11,4 +11,9 @@
         android:id="@+id/listar_usuarios" app:showAsAction="never"
         android:title="Contatos">
     </item>
+
+    <item
+        android:id="@+id/criar_chamado" app:showAsAction="never"
+        android:title="Registrar Chamado">
+    </item>
 </menu>

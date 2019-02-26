@@ -30,6 +30,18 @@
         android:id="@+id/spinner_receptor">
     </Spinner>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Status:"
+        android:textSize="19sp"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_chamado_status">
+    </Spinner>
+
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -52,43 +64,10 @@
             android:id="@+id/formulario_descricao"/>
     </android.support.design.widget.TextInputLayout>
 
-
-    <RadioGroup
-        android:layout_marginTop="50px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/radioGroup">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_baixo"
-            android:textSize="19sp"
-
-            android:text="Baixo"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100px"
-            android:layout_marginRight="100px"
-            android:id="@+id/radio_medio"
-            android:text="Médio"
-            android:textSize="19sp"
-            />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_alto"
-            android:text="Alto"
-            android:textSize="19sp"/>
-    </RadioGroup>
-
-         <Button
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="Salvar"
-             android:id="@+id/formulario_btn"
-        />
+     <Button
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Salvar"
+         android:id="@+id/formulario_btn" />
 
 </LinearLayout>

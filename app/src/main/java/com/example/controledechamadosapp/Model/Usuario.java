@@ -43,7 +43,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return nome + " - " + id;
+        return nome;
     }
 }
 

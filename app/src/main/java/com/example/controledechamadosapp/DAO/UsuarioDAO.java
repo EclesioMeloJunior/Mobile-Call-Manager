@@ -13,35 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO extends SQLiteOpenHelper {
+public class UsuarioDAO extends BaseDAO {
+
     public UsuarioDAO(Context context) {
-        super(context, "ControleChamadas", null, 1);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String sql = "create table usuarios (id integer primary key," +
-                "nome text not null," +
-                "email text," +
-                "telefone text)";
-
-        db.execSQL(sql);
-
-        String sqlChamado = "create table chamados (id integer primary key," +
-                "assunto text not null," +
-                "descricao text,"+
-        //"dataCriacao date ," +
-                "idUserRemetente integer ," +
-                "idUserDestinatario integer," +
-        //"status integer," +
-                "FOREIGN KEY (idUserRemetente) REFERENCES usuarios(id)," +
-                "FOREIGN KEY (idUserDestinatario) REFERENCES usuarios(id))";
-        db.execSQL(sqlChamado);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        super(context);
     }
 
     public void inserir(Usuario usuario){
@@ -99,6 +74,7 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(sql, null);
 
         List<Usuario> usuarios = new ArrayList<>();
+
         while (c.moveToNext()) {
             Usuario usuario = new Usuario();
             usuario.setId(c.getInt(c.getColumnIndex("id")));
@@ -106,43 +82,27 @@ public class UsuarioDAO extends SQLiteOpenHelper {
 
             usuarios.add(usuario);
         }
+
         return usuarios;
     }
 
-    public void inserirChamado(Chamado chamado){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues dados = new ContentValues();
-
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //String date = sdf.format(chamado.getData_criacao());
-
-        dados.put("assunto", chamado.getAssunto());
-        dados.put("descricao", chamado.getDescricao());
-        //  dados.put("dataCriacao", date);
-        dados.put("idUserRemetente", chamado.getUsuarioLancamento().getId());
-        dados.put("idUserDestinatario", chamado.getUsuarioDestino().getId());
-        //dados.put("status", chamado.getStatus().ordinal());
-        db.insert("chamados", null, dados);
-    }
-
-
-    public List<Chamado> listarChamado()
+    public Usuario getUsuarioById(int id)
     {
-        String sql = "select * from chamados inner join usuarios on chamados.idUserDestinatario = usuarios.id;";
+        String sql = "Select * from usuarios where id = " + id + ";";
 
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(sql, null);
 
-        List<Chamado> chamados = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
+
         while (c.moveToNext()) {
-            Chamado chamado = new Chamado();
-            chamado.setAssunto(c.getString(c.getColumnIndex("assunto")));
-            chamado.setDescricao(c.getString(c.getColumnIndex("descricao")));
-            chamados.add(chamado);
+            Usuario usuario = new Usuario();
+            usuario.setId(c.getInt(c.getColumnIndex("id")));
+            usuario.setNome(c.getString(c.getColumnIndex("nome")));
+
+            usuarios.add(usuario);
         }
 
-        return chamados;
+        return usuarios.get(0);
     }
-
-
 }
