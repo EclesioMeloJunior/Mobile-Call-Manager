@@ -10,9 +10,13 @@ import com.example.controledechamadosapp.Model.Chamado;
 import com.example.controledechamadosapp.Model.ChamadoStatus;
 import com.example.controledechamadosapp.Model.Usuario;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ChamadoDAO extends BaseDAO {
     private Context context;
@@ -85,8 +89,7 @@ public class ChamadoDAO extends BaseDAO {
         return chamados;
     }
 
-    public Chamado getChamadoById(int chamadoId)
-    {
+    public Chamado getChamadoById(int chamadoId) throws ParseException {
         String sql = "select * from chamados inner join usuarios on chamados.idUserDestinatario = usuarios.id where id_chamado = " + chamadoId + ";";
 
         SQLiteDatabase db = getReadableDatabase();
@@ -103,6 +106,12 @@ public class ChamadoDAO extends BaseDAO {
             chamado.setId(c.getInt(c.getColumnIndex("id_chamado")));
             chamado.setAssunto(c.getString(c.getColumnIndex("assunto")));
             chamado.setDescricao(c.getString(c.getColumnIndex("descricao")));
+
+            String string = c.getString(c.getColumnIndex("dataCriacao"));
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            Date date = format.parse(string);
+
+            chamado.setData_criacao(date);
 
             Usuario usuarioDestinatario = usuarioDAO.getUsuarioById(c.getInt(c.getColumnIndex("idUserDestinatario")));
             Usuario usuairoRemetente = usuarioDAO.getUsuarioById(c.getInt(c.getColumnIndex("idUserRemetente")));

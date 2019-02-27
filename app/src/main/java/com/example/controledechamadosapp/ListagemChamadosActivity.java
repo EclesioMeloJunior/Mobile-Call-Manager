@@ -2,6 +2,7 @@ package com.example.controledechamadosapp;
 
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -17,15 +18,19 @@ import com.example.controledechamadosapp.Helpers.ChamadosAdapterPersonalizado;
 import com.example.controledechamadosapp.Model.Chamado;
 import com.example.controledechamadosapp.Model.Usuario;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class ListagemChamadosActivity extends AppCompatActivity {
 
     private ListView lvChamados;
+    private FloatingActionButton btnChamado;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
+
     }
 
     @Override
@@ -52,6 +57,8 @@ public class ListagemChamadosActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     public void GetAllChamados()
     {
         this.lvChamados = findViewById(R.id.lvChamados);
@@ -72,6 +79,16 @@ public class ListagemChamadosActivity extends AppCompatActivity {
         final UsuarioDAO usuarioDAO = new UsuarioDAO(this);
         setContentView(R.layout.activity_listagem_chamados);
 
+        btnChamado = findViewById(R.id.formulario_novo_chamado);
+
+        btnChamado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListagemChamadosActivity.this, FormularioChamadoActivity.class);
+                startActivity(intent);
+            }
+        });
+
         this.GetAllChamados();
 
         lvChamados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,7 +96,11 @@ public class ListagemChamadosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> lista, View item, int posicao, long id) {
                 Chamado chamado = (Chamado) lista.getItemAtPosition(posicao);
 
-                chamado = new ChamadoDAO(ListagemChamadosActivity.this).getChamadoById(chamado.id);
+                try {
+                    chamado = new ChamadoDAO(ListagemChamadosActivity.this).getChamadoById(chamado.id);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 Intent intent = new Intent(ListagemChamadosActivity.this, FormularioChamadoActivity.class);
                 intent.putExtra("chamado", chamado);
