@@ -1,6 +1,7 @@
 package com.example.controledechamadosapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcelable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -67,17 +68,18 @@ public class ListarUsuariosActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        MenuItem menuDeletar = menu.add("Deletar");
+        MenuItem menuLigar = menu.add("Ligar");
+        
 
-
-        menuDeletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        menuLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AdapterView.AdapterContextMenuInfo menu = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Usuario usuario = (Usuario) listaUsuarios.getItemAtPosition(menu.position);
+                 usuario = (Usuario) listaUsuarios.getItemAtPosition(menu.position);
 
-
-                usuarioDAO.deletar(usuario);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+usuario.getTelefone()));
+                startActivity(intent);
 
                 ListarUsuarios();
 

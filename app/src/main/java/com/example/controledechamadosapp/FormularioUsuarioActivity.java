@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.controledechamadosapp.DAO.ChamadoDAO;
 import com.example.controledechamadosapp.DAO.UsuarioDAO;
 import com.example.controledechamadosapp.Model.Usuario;
 
@@ -21,6 +24,34 @@ public class FormularioUsuarioActivity extends AppCompatActivity {
     private TextInputEditText emailUsuario;
     private TextInputEditText telefoneUsuario;
     private Button formUsuario;
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_action_formulariousuario, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_deletar_usuario:
+                if(usuario.getId() != 0)
+                {
+                    new UsuarioDAO(this).deletar(usuario);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(FormularioUsuarioActivity.this, "Não é possível deletar!", Toast.LENGTH_LONG).show();
+                }
+                break;
+
+        }
+
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
