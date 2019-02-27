@@ -18,6 +18,7 @@ import com.example.controledechamadosapp.Helpers.ChamadosAdapterPersonalizado;
 import com.example.controledechamadosapp.Model.Chamado;
 import com.example.controledechamadosapp.Model.Usuario;
 
+import java.text.ParseException;
 import java.util.List;
 
 public class ListagemChamadosActivity extends AppCompatActivity {
@@ -95,7 +96,11 @@ public class ListagemChamadosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> lista, View item, int posicao, long id) {
                 Chamado chamado = (Chamado) lista.getItemAtPosition(posicao);
 
-                chamado = new ChamadoDAO(ListagemChamadosActivity.this).getChamadoById(chamado.id);
+                try {
+                    chamado = new ChamadoDAO(ListagemChamadosActivity.this).getChamadoById(chamado.id);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 Intent intent = new Intent(ListagemChamadosActivity.this, FormularioChamadoActivity.class);
                 intent.putExtra("chamado", chamado);
