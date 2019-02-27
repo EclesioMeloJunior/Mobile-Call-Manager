@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ListView
+        android:id="@+id/lvChamados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/formulario_novo_chamado"
         android:layout_width="match_parent"
